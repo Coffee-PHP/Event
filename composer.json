@@ -1,0 +1,58 @@
+{
+	"name": "coffeephp/event",
+	"description": "Provides a PSR-compliant event dispatcher implementation.",
+	"license": "Apache-2.0",
+	"authors": [
+		{
+			"name": "Danny Damsky",
+			"email": "dannydamsky99@gmail.com"
+		}
+	],
+	"keywords": [
+		"coffeephp",
+		"coffee",
+		"php",
+		"psr",
+		"event",
+		"dispatcher"
+	],
+	"require": {
+		"php": ">=7.4",
+		"ext-apcu": "*",
+		"psr/event-dispatcher": "*"
+	},
+	"require-dev": {
+		"coffeephp/component-registry": "1.*",
+		"phpunit/phpunit": "9.*",
+		"roave/security-advisories": "dev-master"
+	},
+	"autoload": {
+		"psr-4": {
+			"CoffeePhp\\Event\\": "src/"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"CoffeePhp\\Event\\Test\\Integration\\": "test/Integration/",
+			"CoffeePhp\\Event\\Test\\Mock\\": "test/Mock/",
+			"CoffeePhp\\Event\\Test\\Unit\\": "test/Unit/"
+		}
+	},
+	"suggest": {
+		"coffeephp/component-registry": "For integration of the component with the CoffeePHP framework."
+	},
+	"config": {
+		"sort-packages": true,
+		"optimize-autoloader": true,
+		"apcu-autoloader": true
+	},
+	"extra": {
+		"coffeephp": {
+			"registry": [
+				{
+					"registrar": "CoffeePhp\\Event\\Integration\\EventComponentRegistrar"
+				}
+			]
+		}
+	}
+}
