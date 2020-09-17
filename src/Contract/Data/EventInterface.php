@@ -25,7 +25,6 @@ declare(strict_types=1);
 
 namespace CoffeePhp\Event\Contract\Data;
 
-
 use Psr\EventDispatcher\StoppableEventInterface;
 use Serializable;
 

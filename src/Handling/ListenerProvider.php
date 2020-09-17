@@ -25,7 +25,6 @@ declare(strict_types=1);
 
 namespace CoffeePhp\Event\Handling;
 
-
 use CoffeePhp\Event\Contract\Data\EventListenerMapInterface;
 use CoffeePhp\Event\Contract\Handling\ListenerProviderInterface;
 

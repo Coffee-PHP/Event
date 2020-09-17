@@ -25,7 +25,6 @@ declare(strict_types=1);
 
 namespace CoffeePhp\Event\Data;
 
-
 use CoffeePhp\Event\Contract\Data\EventInterface;
 
 use function serialize;

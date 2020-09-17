@@ -25,7 +25,6 @@ declare(strict_types=1);
 
 namespace CoffeePhp\Event\Handling;
 
-
 use CoffeePhp\Event\Contract\Handling\EventDispatcherInterface;
 use CoffeePhp\Event\Contract\Handling\ListenerProviderInterface;
 use Psr\EventDispatcher\StoppableEventInterface;
