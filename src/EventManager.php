@@ -80,7 +80,7 @@ final class EventManager implements EventManagerInterface
         } catch (EventException $e) {
             throw $e;
         } catch (Throwable $e) {
-            throw new EventException($e->getMessage(), $e->getCode(), $e);
+            throw new EventException($e->getMessage(), (int)$e->getCode(), $e);
         }
     }
 
