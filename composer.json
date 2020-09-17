@@ -1,58 +1,75 @@
 {
-	"name": "coffeephp/event",
-	"description": "Provides a PSR-compliant event dispatcher implementation.",
-	"license": "Apache-2.0",
-	"authors": [
-		{
-			"name": "Danny Damsky",
-			"email": "dannydamsky99@gmail.com"
-		}
-	],
-	"keywords": [
-		"coffeephp",
-		"coffee",
-		"php",
-		"psr",
-		"event",
-		"dispatcher"
-	],
-	"require": {
-		"php": ">=7.4",
-		"ext-apcu": "*",
-		"psr/event-dispatcher": "*"
-	},
-	"require-dev": {
-		"coffeephp/component-registry": "1.*",
-		"phpunit/phpunit": "9.*",
-		"roave/security-advisories": "dev-master"
-	},
-	"autoload": {
-		"psr-4": {
-			"CoffeePhp\\Event\\": "src/"
-		}
-	},
-	"autoload-dev": {
-		"psr-4": {
-			"CoffeePhp\\Event\\Test\\Integration\\": "test/Integration/",
-			"CoffeePhp\\Event\\Test\\Mock\\": "test/Mock/",
-			"CoffeePhp\\Event\\Test\\Unit\\": "test/Unit/"
-		}
-	},
-	"suggest": {
-		"coffeephp/component-registry": "For integration of the component with the CoffeePHP framework."
-	},
-	"config": {
-		"sort-packages": true,
-		"optimize-autoloader": true,
-		"apcu-autoloader": true
-	},
-	"extra": {
-		"coffeephp": {
-			"registry": [
-				{
-					"registrar": "CoffeePhp\\Event\\Integration\\EventComponentRegistrar"
-				}
-			]
-		}
-	}
+    "name": "coffeephp/event",
+    "description": "Provides a PSR-compliant event dispatcher implementation.",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "Danny Damsky",
+            "email": "dannydamsky99@gmail.com"
+        }
+    ],
+    "keywords": [
+        "coffeephp",
+        "coffee",
+        "php",
+        "psr",
+        "event",
+        "dispatcher"
+    ],
+    "require": {
+        "php": ">=7.4",
+        "ext-apcu": "*",
+        "psr/event-dispatcher": "*"
+    },
+    "require-dev": {
+        "coffeephp/component-registry": "1.*",
+        "coffeephp/quality-tools": "1.*",
+        "roave/security-advisories": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "CoffeePhp\\Event\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "CoffeePhp\\Event\\Test\\Integration\\": "test/Integration/",
+            "CoffeePhp\\Event\\Test\\Mock\\": "test/Mock/",
+            "CoffeePhp\\Event\\Test\\Unit\\": "test/Unit/"
+        }
+    },
+    "suggest": {
+        "coffeephp/component-registry": "For integration of the component with the CoffeePHP framework."
+    },
+    "config": {
+        "sort-packages": true,
+        "optimize-autoloader": true,
+        "apcu-autoloader": true
+    },
+    "extra": {
+        "coffeephp": {
+            "registry": [
+                {
+                    "registrar": "CoffeePhp\\Event\\Integration\\EventComponentRegistrar"
+                }
+            ]
+        }
+    },
+    "scripts": {
+        "coffeephp:exec:phpcbf": "coffeephp_exec_phpcbf",
+        "coffeephp:exec:phpcs": "coffeephp_exec_phpcs",
+        "coffeephp:exec:phpmd": "coffeephp_exec_phpmd",
+        "coffeephp:exec:phpstan-analyse": "coffeephp_exec_phpstan_analyse",
+        "coffeephp:exec:phpunit": "coffeephp_exec_phpunit --testsuite unit,integration",
+        "coffeephp:exec:psalm": "coffeephp_exec_psalm",
+        "coffeephp:exec:psalm-alter": "coffeephp_exec_psalm_alter",
+        "coffeephp:exec:publish": "coffeephp_exec_publish",
+        "coffeephp:exec:analyse": [
+            "@coffeephp:exec:phpunit",
+            "@coffeephp:exec:psalm",
+            "@coffeephp:exec:phpcs",
+            "@coffeephp:exec:phpstan-analyse",
+            "@coffeephp:exec:phpmd"
+        ]
+    }
 }

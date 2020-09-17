@@ -25,7 +25,6 @@ declare(strict_types=1);
 
 namespace CoffeePhp\Event\Data;
 
-
 use CoffeePhp\Event\Contract\Data\EventInterface;
 
 use function serialize;
@@ -75,8 +74,8 @@ abstract class AbstractEvent implements EventInterface
      */
     final public function unserialize($serialized): void
     {
-        $data = unserialize($serialized);
-        $this->propagationStopped = $data['propagationStopped'];
+        $data = (array)unserialize($serialized);
+        $this->propagationStopped = (bool)$data['propagationStopped'];
         $this->fromArray($data);
     }
 

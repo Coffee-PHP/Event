@@ -25,7 +25,6 @@ declare(strict_types=1);
 
 namespace CoffeePhp\Event\Handling;
 
-
 use CoffeePhp\Event\Contract\Handling\EventDispatcherInterface;
 use CoffeePhp\Event\Contract\Handling\ListenerProviderInterface;
 use Psr\EventDispatcher\StoppableEventInterface;
@@ -52,15 +51,23 @@ final class EventDispatcher implements EventDispatcherInterface
     /**
      * @inheritDoc
      * @param object|StoppableEventInterface $event
+     * @psalm-suppress MixedMethodCall
      */
     public function dispatch(object $event): object
     {
         $stoppable = $event instanceof StoppableEventInterface;
+
+        /** @phpstan-ignore-next-line */
         if ($stoppable && $event->isPropagationStopped()) {
             return $event;
         }
+        /**
+         * @var callable $listener
+         */
         foreach ($this->listenerProvider->getListenersForEvent($event) as $listener) {
             $listener($event);
+
+            /** @phpstan-ignore-next-line */
             if ($stoppable && $event->isPropagationStopped()) {
                 break;
             }

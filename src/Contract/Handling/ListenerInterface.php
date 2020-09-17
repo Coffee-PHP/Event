@@ -25,7 +25,6 @@ declare(strict_types=1);
 
 namespace CoffeePhp\Event\Contract\Handling;
 
-
 /**
  * Interface ListenerInterface
  * @package coffeephp\event

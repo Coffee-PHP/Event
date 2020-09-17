@@ -21,10 +21,9 @@
  * @since 2020-09-04
  */
 
-declare (strict_types=1);
+declare(strict_types=1);
 
 namespace CoffeePhp\Event\Util;
-
 
 use CoffeePhp\Event\Contract\Data\EventInterface;
 use CoffeePhp\Event\Contract\Data\EventListenerMapInterface;

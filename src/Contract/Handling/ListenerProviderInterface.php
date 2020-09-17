@@ -25,7 +25,6 @@ declare(strict_types=1);
 
 namespace CoffeePhp\Event\Contract\Handling;
 
-
 use Psr\EventDispatcher\ListenerProviderInterface as PsrListenerProviderInterface;
 
 /**

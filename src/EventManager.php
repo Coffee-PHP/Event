@@ -25,7 +25,6 @@ declare(strict_types=1);
 
 namespace CoffeePhp\Event;
 
-
 use CoffeePhp\Event\Contract\Data\EventInterface;
 use CoffeePhp\Event\Contract\Data\EventListenerMapInterface;
 use CoffeePhp\Event\Contract\EventManagerInterface;
@@ -81,7 +80,7 @@ final class EventManager implements EventManagerInterface
         } catch (EventException $e) {
             throw $e;
         } catch (Throwable $e) {
-            throw new EventException($e->getMessage(), $e->getCode(), $e);
+            throw new EventException($e->getMessage(), (int)$e->getCode(), $e);
         }
     }
 

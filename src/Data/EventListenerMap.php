@@ -25,7 +25,6 @@ declare(strict_types=1);
 
 namespace CoffeePhp\Event\Data;
 
-
 use CoffeePhp\Event\Contract\Data\EventListenerMapInterface;
 
 use function get_class;
