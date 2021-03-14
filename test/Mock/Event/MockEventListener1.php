@@ -1,9 +1,9 @@
 <?php
 
 /**
- * AbstractListener.php
+ * MockEventListener1.php
  *
- * Copyright 2020 Danny Damsky
+ * Copyright 2021 Danny Damsky
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -18,36 +18,23 @@
  *
  * @package coffeephp\event
  * @author Danny Damsky <dannydamsky99@gmail.com>
- * @since 2020-09-03
+ * @since 2021-03-14
  */
 
 declare(strict_types=1);
 
-namespace CoffeePhp\Event\Handling;
-
-use CoffeePhp\Event\Contract\Handling\ListenerInterface;
+namespace CoffeePhp\Event\Test\Mock\Event;
 
 /**
- * Class AbstractListener
+ * Class MockEventListener1
  * @package coffeephp\event
  * @author Danny Damsky <dannydamsky99@gmail.com>
- * @since 2020-09-03
+ * @since 2021-03-14
  */
-abstract class AbstractListener implements ListenerInterface
+final class MockEventListener1
 {
-
-    /**
-     * @inheritDoc
-     */
-    final public function __invoke(object $event): void
+    public function __invoke(MockEvent $event): void
     {
-        $this->handle($event);
+        $event->addData(1);
     }
-
-    /**
-     * Handle the event.
-     *
-     * @param object $event
-     */
-    abstract protected function handle(object $event): void;
 }

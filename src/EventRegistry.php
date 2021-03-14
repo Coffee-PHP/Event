@@ -1,7 +1,7 @@
 <?php
 
 /**
- * ListenerProvider.php
+ * EventRegistry.php
  *
  * Copyright 2020 Danny Damsky
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,36 +23,49 @@
 
 declare(strict_types=1);
 
-namespace CoffeePhp\Event\Handling;
+namespace CoffeePhp\Event;
 
-use CoffeePhp\Event\Contract\Data\EventListenerMapInterface;
-use CoffeePhp\Event\Contract\Handling\ListenerProviderInterface;
+use CoffeePhp\Event\Contract\EventRegistryInterface;
+
+use function spl_object_id;
 
 /**
- * Class ListenerProvider
+ * Class EventRegistry
  * @package coffeephp\event
  * @author Danny Damsky <dannydamsky99@gmail.com>
  * @since 2020-09-03
  */
-final class ListenerProvider implements ListenerProviderInterface
+final class EventRegistry implements EventRegistryInterface
 {
-    private EventListenerMapInterface $eventListenerMap;
+    /**
+     * A map of event object IDs to event objects, used to prevent garbage collection.
+     *
+     * @var array<int, object>
+     */
+    private array $events = [];
 
     /**
-     * ListenerProvider constructor.
-     * @param EventListenerMapInterface $eventListenerMap
+     * A map of event object IDs to an array of listeners.
+     *
+     * @var array<int, array<int, callable>>
      */
-    public function __construct(EventListenerMapInterface $eventListenerMap)
-    {
-        $this->eventListenerMap = $eventListenerMap;
-    }
+    private array $registry = [];
 
+    /**
+     * @inheritDoc
+     */
+    public function registerListenerForEvent(object $event, callable $listener): void
+    {
+        $objectId = spl_object_id($event);
+        $this->events[$objectId] = $event; // Prevent garbage collection.
+        $this->registry[$objectId][] = $listener;
+    }
 
     /**
      * @inheritDoc
      */
     public function getListenersForEvent(object $event): iterable
     {
-        yield from $this->eventListenerMap->get($event);
+        return $this->registry[spl_object_id($event)] ?? [];
     }
 }

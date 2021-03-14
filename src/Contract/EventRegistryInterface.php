@@ -1,7 +1,7 @@
 <?php
 
 /**
- * EventListenerMap.php
+ * EventRegistryInterface.php
  *
  * Copyright 2020 Danny Damsky
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,46 +23,23 @@
 
 declare(strict_types=1);
 
-namespace CoffeePhp\Event\Data;
+namespace CoffeePhp\Event\Contract;
 
-use CoffeePhp\Event\Contract\Data\EventListenerMapInterface;
-
-use function get_class;
+use Psr\EventDispatcher\ListenerProviderInterface;
 
 /**
- * Class EventListenerMap
+ * Interface EventRegistryInterface
  * @package coffeephp\event
  * @author Danny Damsky <dannydamsky99@gmail.com>
  * @since 2020-09-03
  */
-final class EventListenerMap implements EventListenerMapInterface
+interface EventRegistryInterface extends ListenerProviderInterface
 {
     /**
-     * @var array<string, callable[]>|callable[][]
+     * Register a listener for the given event.
+     *
+     * @param object $event
+     * @param callable $listener
      */
-    private array $map = [];
-
-    /**
-     * @inheritDoc
-     */
-    public function add(object $event, callable $listener): void
-    {
-        $this->map[get_class($event)][] = $listener;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function get(object $event): array
-    {
-        return $this->map[get_class($event)] ?? [];
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function toArray(): array
-    {
-        return $this->map;
-    }
+    public function registerListenerForEvent(object $event, callable $listener): void;
 }

@@ -23,10 +23,10 @@
 
 declare(strict_types=1);
 
-namespace CoffeePhp\Event\Handling;
+namespace CoffeePhp\Event;
 
-use CoffeePhp\Event\Contract\Handling\EventDispatcherInterface;
-use CoffeePhp\Event\Contract\Handling\ListenerProviderInterface;
+use Psr\EventDispatcher\EventDispatcherInterface;
+use Psr\EventDispatcher\ListenerProviderInterface;
 use Psr\EventDispatcher\StoppableEventInterface;
 
 /**
@@ -37,38 +37,27 @@ use Psr\EventDispatcher\StoppableEventInterface;
  */
 final class EventDispatcher implements EventDispatcherInterface
 {
-    private ListenerProviderInterface $listenerProvider;
-
     /**
      * EventDispatcher constructor.
      * @param ListenerProviderInterface $listenerProvider
      */
-    public function __construct(ListenerProviderInterface $listenerProvider)
+    public function __construct(private ListenerProviderInterface $listenerProvider)
     {
-        $this->listenerProvider = $listenerProvider;
     }
 
     /**
      * @inheritDoc
-     * @param object|StoppableEventInterface $event
-     * @psalm-suppress MixedMethodCall
+     * @psalm-suppress MixedMethodCall, MixedFunctionCall, MixedAssignment
      */
     public function dispatch(object $event): object
     {
         $stoppable = $event instanceof StoppableEventInterface;
-
-        /** @phpstan-ignore-next-line */
         if ($stoppable && $event->isPropagationStopped()) {
             return $event;
         }
-        /**
-         * @var callable $listener
-         */
         foreach ($this->listenerProvider->getListenersForEvent($event) as $listener) {
             $listener($event);
-
-            /** @phpstan-ignore-next-line */
-            if ($stoppable && $event->isPropagationStopped()) {
+            if ($stoppable && $event->isPropagationStopped()) { // @phpstan-ignore-line
                 break;
             }
         }

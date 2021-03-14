@@ -1,9 +1,9 @@
 <?php
 
 /**
- * EventComponentRegistrar.php
+ * MockListenersComponentRegistrar.php
  *
- * Copyright 2020 Danny Damsky
+ * Copyright 2021 Danny Damsky
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -18,33 +18,28 @@
  *
  * @package coffeephp\event
  * @author Danny Damsky <dannydamsky99@gmail.com>
- * @since 2020-09-03
+ * @since 2021-03-14
  */
 
 declare(strict_types=1);
 
-namespace CoffeePhp\Event\Integration;
+namespace CoffeePhp\Event\Test\Mock\Integration;
 
 use CoffeePhp\ComponentRegistry\Contract\ComponentRegistrarInterface;
 use CoffeePhp\Di\Contract\ContainerInterface;
-use CoffeePhp\Event\Contract\EventRegistryInterface;
-use CoffeePhp\Event\EventDispatcher;
-use CoffeePhp\Event\EventRegistry;
-use Psr\EventDispatcher\EventDispatcherInterface;
-use Psr\EventDispatcher\ListenerProviderInterface;
+use CoffeePhp\Event\Test\Mock\Event\MockEventListener1;
+use CoffeePhp\Event\Test\Mock\Event\MockEventListener2;
+use CoffeePhp\Event\Test\Mock\Event\MockEventListener3;
+use CoffeePhp\Event\Test\Mock\Event\MockEventListener4;
 
 /**
- * Class EventComponentRegistrar
+ * Class MockListenersComponentRegistrar
  * @package coffeephp\event
  * @author Danny Damsky <dannydamsky99@gmail.com>
- * @since 2020-09-03
+ * @since 2021-03-14
  */
-final class EventComponentRegistrar implements ComponentRegistrarInterface
+final class MockListenersComponentRegistrar implements ComponentRegistrarInterface
 {
-    /**
-     * EventComponentRegistrar constructor.
-     * @param ContainerInterface $di
-     */
     public function __construct(private ContainerInterface $di)
     {
     }
@@ -54,11 +49,9 @@ final class EventComponentRegistrar implements ComponentRegistrarInterface
      */
     public function register(): void
     {
-        $this->di->bind(EventDispatcher::class, EventDispatcher::class);
-        $this->di->bind(EventDispatcherInterface::class, EventDispatcher::class);
-
-        $this->di->bind(EventRegistry::class, EventRegistry::class);
-        $this->di->bind(EventRegistryInterface::class, EventRegistry::class);
-        $this->di->bind(ListenerProviderInterface::class, EventRegistryInterface::class);
+        $this->di->bind(MockEventListener1::class, MockEventListener1::class);
+        $this->di->bind(MockEventListener2::class, MockEventListener2::class);
+        $this->di->bind(MockEventListener3::class, MockEventListener3::class);
+        $this->di->bind(MockEventListener4::class, MockEventListener4::class);
     }
 }

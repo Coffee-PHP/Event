@@ -17,8 +17,9 @@
         "dispatcher"
     ],
     "require": {
-        "php": ">=7.4",
+        "php": ">=8.0",
         "ext-apcu": "*",
+        "coffeephp/di": "1.*",
         "psr/event-dispatcher": "*"
     },
     "require-dev": {
@@ -46,15 +47,6 @@
         "optimize-autoloader": true,
         "apcu-autoloader": true
     },
-    "extra": {
-        "coffeephp": {
-            "registry": [
-                {
-                    "registrar": "CoffeePhp\\Event\\Integration\\EventComponentRegistrar"
-                }
-            ]
-        }
-    },
     "scripts": {
         "coffeephp:exec:phpcbf": "coffeephp_exec_phpcbf",
         "coffeephp:exec:phpcs": "coffeephp_exec_phpcs",
@@ -63,13 +55,6 @@
         "coffeephp:exec:phpunit": "coffeephp_exec_phpunit --testsuite unit,integration",
         "coffeephp:exec:psalm": "coffeephp_exec_psalm",
         "coffeephp:exec:psalm-alter": "coffeephp_exec_psalm_alter",
-        "coffeephp:exec:publish": "coffeephp_exec_publish",
-        "coffeephp:exec:analyse": [
-            "@coffeephp:exec:phpunit",
-            "@coffeephp:exec:psalm",
-            "@coffeephp:exec:phpcs",
-            "@coffeephp:exec:phpstan-analyse",
-            "@coffeephp:exec:phpmd"
-        ]
+        "coffeephp:exec:publish": "coffeephp_exec_publish"
     }
 }
