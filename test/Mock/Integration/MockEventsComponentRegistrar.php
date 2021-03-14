@@ -1,9 +1,9 @@
 <?php
 
 /**
- * EventListenerMapInterface.php
+ * MockEventsComponentRegistrar.php
  *
- * Copyright 2020 Danny Damsky
+ * Copyright 2021 Danny Damsky
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -18,41 +18,35 @@
  *
  * @package coffeephp\event
  * @author Danny Damsky <dannydamsky99@gmail.com>
- * @since 2020-09-03
+ * @since 2021-03-14
  */
+
 
 declare(strict_types=1);
 
-namespace CoffeePhp\Event\Contract\Data;
+namespace CoffeePhp\Event\Test\Mock\Integration;
+
+use CoffeePhp\ComponentRegistry\Contract\ComponentRegistrarInterface;
+use CoffeePhp\Di\Contract\ContainerInterface;
+use CoffeePhp\Event\Test\Mock\Event\MockEvent;
 
 /**
- * Interface EventListenerMapInterface
+ * Class MockEventsComponentRegistrar
  * @package coffeephp\event
  * @author Danny Damsky <dannydamsky99@gmail.com>
- * @since 2020-09-03
+ * @since 2021-03-14
  */
-interface EventListenerMapInterface
+final class MockEventsComponentRegistrar implements ComponentRegistrarInterface
 {
-    /**
-     * Add a listener for the given event.
-     *
-     * @param object $event
-     * @param callable $listener
-     */
-    public function add(object $event, callable $listener): void;
+    public function __construct(private ContainerInterface $di)
+    {
+    }
 
     /**
-     * Get the listeners for the given event.
-     *
-     * @param object $event
-     * @return callable[]
+     * @inheritDoc
      */
-    public function get(object $event): array;
-
-    /**
-     * Get the map as a raw array.
-     *
-     * @return array<string, callable[]>|callable[][]
-     */
-    public function toArray(): array;
+    public function register(): void
+    {
+        $this->di->bind(MockEvent::class, MockEvent::class);
+    }
 }

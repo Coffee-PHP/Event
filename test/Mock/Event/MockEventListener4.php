@@ -1,9 +1,9 @@
 <?php
 
 /**
- * ListenerProviderInterface.php
+ * MockEventListener4.php
  *
- * Copyright 2020 Danny Damsky
+ * Copyright 2021 Danny Damsky
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -18,21 +18,23 @@
  *
  * @package coffeephp\event
  * @author Danny Damsky <dannydamsky99@gmail.com>
- * @since 2020-09-03
+ * @since 2021-03-14
  */
 
 declare(strict_types=1);
 
-namespace CoffeePhp\Event\Contract\Handling;
-
-use Psr\EventDispatcher\ListenerProviderInterface as PsrListenerProviderInterface;
+namespace CoffeePhp\Event\Test\Mock\Event;
 
 /**
- * Interface ListenerProviderInterface
+ * Class MockEventListener4
  * @package coffeephp\event
  * @author Danny Damsky <dannydamsky99@gmail.com>
- * @since 2020-09-03
+ * @since 2021-03-14
  */
-interface ListenerProviderInterface extends PsrListenerProviderInterface
+final class MockEventListener4
 {
+    public function __invoke(MockEvent $event): void
+    {
+        $event->addData(4);
+    }
 }
