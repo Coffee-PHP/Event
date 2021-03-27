@@ -1,5 +1,7 @@
 # Coffee PHP - Event
 
+![Build](https://github.com/Coffee-PHP/Event/workflows/Build/badge.svg)
+
 Provides a PSR-compliant event dispatcher implementation.
 
 ```
